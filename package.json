@@ -1,0 +1,18 @@
+{
+  "name": "caddy-poker-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Marketing website + custom WordPress theme (Caddy Poker 2026) for the Caddy Poker mobile app.",
+  "scripts": {
+    "start": "wp-env start",
+    "stop": "wp-env stop",
+    "clean": "wp-env clean all",
+    "destroy": "wp-env destroy",
+    "cli": "wp-env run cli wp",
+    "setup": "wp-env start && wp-env run cli wp eval-file /var/www/html/wp-content/themes/caddy-poker-2026/bin/setup-pages.php",
+    "logs": "wp-env logs"
+  },
+  "devDependencies": {
+    "@wordpress/env": "^10.10.0"
+  }
+}

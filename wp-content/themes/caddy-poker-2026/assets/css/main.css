@@ -1,0 +1,714 @@
+/* =========================================================================
+   Caddy Poker 2026 — brand styles
+   Palette source of truth: caddy-poker-app/src/theme.ts
+   ========================================================================= */
+
+:root {
+	/* Brand palette */
+	--cp-bg: #0B1F17;          /* deep fairway green */
+	--cp-bg-elevated: #102B20;
+	--cp-card: #16382A;
+	--cp-border: #1F4D39;
+	--cp-text: #F4F8F5;
+	--cp-text-muted: #9CB7A8;  /* sage */
+	--cp-primary: #34C759;     /* golf-green accent */
+	--cp-primary-text: #06210F;
+	--cp-sky: #42A7DE;         /* vibrant sky blue (sampled from cp-landscaping) */
+	--cp-gold: #FFD66B;
+	--cp-danger: #FF6B6B;
+	--cp-white: #FFFFFF;
+	--cp-black: #0A0A0A;
+
+	/* Spacing (mirrors app tokens) */
+	--sp-xs: 4px;
+	--sp-sm: 8px;
+	--sp-md: 16px;
+	--sp-lg: 24px;
+	--sp-xl: 36px;
+	--sp-2xl: 64px;
+	--sp-3xl: 96px;
+
+	/* Radius */
+	--r-sm: 8px;
+	--r-md: 16px;
+	--r-lg: 24px;
+
+	--container: 1120px;
+	--container-narrow: 760px;
+
+	--font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	--shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+	--header-h: 68px;
+	--ground-h: max(20vh, 160px); /* decorative grass band height */
+}
+
+/* --- Reset-ish base ------------------------------------------------------ */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	font-family: var(--font);
+	color: var(--cp-text);
+	background-color: var(--cp-bg);
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+	overflow-x: hidden;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+a {
+	color: var(--cp-primary);
+	text-decoration: none;
+}
+
+a:hover {
+	color: var(--cp-gold);
+}
+
+h1, h2, h3, h4 {
+	line-height: 1.1;
+	font-weight: 900;
+	letter-spacing: -0.01em;
+	margin: 0 0 var(--sp-md);
+}
+
+h1 { font-size: clamp(2.2rem, 6vw, 4rem); }
+h2 { font-size: clamp(1.7rem, 4vw, 2.6rem); }
+h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
+
+p { margin: 0 0 var(--sp-md); }
+
+.skip-link {
+	position: absolute;
+	left: -9999px;
+	top: 0;
+	background: var(--cp-gold);
+	color: var(--cp-black);
+	padding: var(--sp-sm) var(--sp-md);
+	z-index: 999;
+	border-radius: 0 0 var(--r-sm) 0;
+	font-weight: 800;
+}
+.skip-link:focus {
+	left: 0;
+}
+
+/* --- Layout -------------------------------------------------------------- */
+.container {
+	width: 100%;
+	max-width: var(--container);
+	margin: 0 auto;
+	padding: 0 var(--sp-lg);
+}
+.container--narrow {
+	max-width: var(--container-narrow);
+}
+
+.section {
+	padding: var(--sp-3xl) 0;
+}
+/* Offset in-page anchor jumps so the sticky header doesn't cover the section top. */
+[id] {
+	scroll-margin-top: calc(var(--header-h) + var(--sp-md));
+}
+.section--tight {
+	padding: var(--sp-2xl) 0;
+}
+.section--center {
+	text-align: center;
+}
+.section--elevated {
+	background: var(--cp-bg-elevated);
+}
+
+.eyebrow {
+	display: inline-block;
+	text-transform: uppercase;
+	letter-spacing: 0.18em;
+	font-size: 0.8rem;
+	font-weight: 800;
+	color: var(--cp-primary);
+	margin-bottom: var(--sp-sm);
+}
+
+.lead {
+	font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+	color: var(--cp-text-muted);
+	max-width: 46ch;
+}
+.section--center .lead {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* --- Header --------------------------------------------------------------
+   Fixed overlay. Hidden at the top of the page; slides in once you scroll.
+   The hide/show is gated behind `.js` so no-JS visitors always get the nav. */
+.site-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+	background: rgba(11, 31, 23, 0.82);
+	backdrop-filter: saturate(140%) blur(10px);
+	-webkit-backdrop-filter: saturate(140%) blur(10px);
+	border-bottom: 1px solid var(--cp-border);
+}
+.js .site-header {
+	transform: translateY(-100%);
+	transition: transform 0.3s ease;
+}
+.js .site-header.is-visible {
+	transform: translateY(0);
+}
+.site-header__inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: var(--header-h);
+	gap: var(--sp-md);
+}
+.site-header__brand {
+	display: flex;
+	align-items: center;
+	gap: var(--sp-sm);
+	color: var(--cp-text);
+	font-weight: 900;
+}
+.site-header__logo {
+	width: 42px;
+	height: 42px;
+	object-fit: contain;
+}
+.site-header__wordmark {
+	font-size: 1.15rem;
+	letter-spacing: -0.01em;
+}
+.site-nav__list {
+	display: flex;
+	gap: var(--sp-lg);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	align-items: center;
+}
+.site-nav__list a {
+	color: var(--cp-text);
+	font-weight: 700;
+	font-size: 0.98rem;
+}
+.site-nav__list a:hover {
+	color: var(--cp-gold);
+}
+
+/* --- Buttons ------------------------------------------------------------- */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--sp-sm);
+	padding: 14px 26px;
+	border-radius: var(--r-md);
+	font-weight: 900;
+	font-size: 1.05rem;
+	letter-spacing: 0.01em;
+	cursor: pointer;
+	border: 2px solid transparent;
+	transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+.btn:hover {
+	transform: translateY(-2px);
+}
+.btn--primary {
+	background: var(--cp-primary);
+	color: var(--cp-primary-text);
+	box-shadow: 0 8px 22px rgba(52, 199, 89, 0.28);
+}
+.btn--primary:hover {
+	color: var(--cp-primary-text);
+	box-shadow: 0 12px 28px rgba(52, 199, 89, 0.36);
+}
+
+/* --- Store badges (coming soon placeholders) ----------------------------- */
+.store-badges {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--sp-xl);
+	justify-content: center;
+	margin-top: var(--sp-xl);
+}
+.store-badge {
+	position: relative;
+	display: inline-block;
+	line-height: 0;            /* drop the descender gap under the image */
+	cursor: default;
+	transition: transform 0.12s ease;
+}
+.store-badge__img {
+	display: block;
+	height: 58px;
+	width: auto;
+}
+/* When these become real links (href set), lift slightly on hover. */
+.store-badge[href] { cursor: pointer; }
+.store-badge[href]:hover { transform: translateY(-2px); }
+
+.store-badge__tag {
+	position: absolute;
+	top: -8px;
+	right: -6px;
+	z-index: 2;
+	font-size: 0.62rem;
+	font-weight: 800;
+	letter-spacing: 0.1em;
+	line-height: 1.4;
+	text-transform: uppercase;
+	color: var(--cp-primary-text);
+	background: var(--cp-gold);
+	padding: 3px 8px;
+	border-radius: 999px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Hero ---------------------------------------------------------------- */
+.hero {
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+	/* Full first screen: sky above, grass pinned to the bottom of the viewport.
+	   Content is centered in the sky area above the grass. */
+	min-height: 100vh;
+	min-height: 100svh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: calc(var(--header-h) + var(--sp-lg)) 0 calc(var(--ground-h) + var(--sp-lg));
+	background: var(--cp-sky);
+}
+.hero__bg {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	background-position: center top;
+	background-size: cover;
+	background-repeat: no-repeat;
+	opacity: 0.28;
+	-webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0));
+	mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0));
+}
+.hero__cloud {
+	position: absolute;
+	left: 0;
+	z-index: 1;
+	pointer-events: none;
+	will-change: transform;
+}
+.hero__cloud--1 { top: 8%; width: 260px; animation: cp-drift 60s linear infinite; }
+.hero__cloud--2 { top: 22%; width: 180px; animation: cp-drift 90s linear infinite reverse; }
+/* Drift within the middle of the viewport — start/end 5% in from each side. */
+@keyframes cp-drift {
+	from { transform: translateX(5vw); }
+	to   { transform: translateX(95vw); }
+}
+.hero__inner {
+	position: relative;
+	z-index: 2;
+}
+.hero__logo {
+	/* Also cap by viewport height so it fits above the grass on short screens. */
+	width: min(340px, 30vh, 62vw);
+	margin: 0 auto var(--sp-lg);
+	filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.45));
+}
+.hero__tagline {
+	font-weight: 900;
+	font-size: clamp(1.3rem, 3.4vw, 2rem);
+	margin-bottom: var(--sp-md);
+	color: var(--cp-white);
+	text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+.hero__sub {
+	/* Light + shadowed so it stays legible on the vibrant blue hero. */
+	color: #EAF4FB;
+	max-width: 52ch;
+	margin: 0 auto var(--sp-lg);
+	font-size: clamp(1rem, 2vw, 1.2rem);
+	text-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Hero sits on vibrant blue — force high-contrast light text on its headings/eyebrow. */
+.hero h1,
+.hero h2 {
+	color: var(--cp-white);
+	text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+}
+.hero .eyebrow {
+	color: var(--cp-white);
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Feature cards ------------------------------------------------------- */
+.grid {
+	display: grid;
+	gap: var(--sp-lg);
+}
+.grid--3 {
+	grid-template-columns: repeat(3, 1fr);
+}
+.feature {
+	background: var(--cp-card);
+	border: 1px solid var(--cp-border);
+	border-radius: var(--r-lg);
+	padding: var(--sp-xl) var(--sp-lg);
+	text-align: center;
+	box-shadow: var(--shadow);
+}
+.feature__art {
+	width: 120px;
+	height: 120px;
+	object-fit: contain;
+	margin: 0 auto var(--sp-md);
+}
+.feature__step {
+	color: var(--cp-gold);
+	font-weight: 900;
+	font-size: 0.8rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	display: block;
+	margin-bottom: var(--sp-xs);
+}
+.feature h3 {
+	margin-bottom: var(--sp-sm);
+}
+.feature p {
+	color: var(--cp-text-muted);
+	margin: 0;
+	font-size: 0.98rem;
+}
+
+/* --- Deck showcase ------------------------------------------------------- */
+.deck {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	gap: 0;
+	flex-wrap: wrap;
+	margin-top: var(--sp-xl);
+	perspective: 1200px;
+}
+.deck__card {
+	width: clamp(110px, 20vw, 190px);
+	border-radius: 12px;
+	box-shadow: var(--shadow);
+	transition: transform 0.2s ease;
+	margin: 0 -14px;
+}
+.deck__card:hover {
+	transform: translateY(-14px) rotate(0deg) scale(1.04);
+	z-index: 5;
+}
+.deck__card:nth-child(1) { transform: rotate(-12deg); }
+.deck__card:nth-child(2) { transform: rotate(-7deg) translateY(-4px); }
+.deck__card:nth-child(3) { transform: rotate(-2deg) translateY(-7px); }
+.deck__card:nth-child(4) { transform: rotate(2deg) translateY(-7px); }
+.deck__card:nth-child(5) { transform: rotate(7deg) translateY(-4px); }
+.deck__card:nth-child(6) { transform: rotate(12deg); }
+
+/* --- How to play --------------------------------------------------------- */
+.video-wrap {
+	position: relative;
+	width: 100%;
+	/* Tutorial is shot in portrait (phone) — keep it phone-shaped and centered. */
+	max-width: 380px;
+	margin: 0 auto var(--sp-xl);
+	aspect-ratio: 1080 / 2346;
+	background: var(--cp-black);
+	border-radius: var(--r-lg);
+	overflow: hidden;
+	border: 1px solid var(--cp-border);
+	box-shadow: var(--shadow);
+}
+.video-wrap video {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	background: var(--cp-black);
+}
+
+.rules {
+	display: grid;
+	gap: var(--sp-lg);
+	grid-template-columns: repeat(3, 1fr);
+	margin-top: var(--sp-xl);
+}
+.rule {
+	background: var(--cp-card);
+	border: 1px solid var(--cp-border);
+	border-radius: var(--r-md);
+	padding: var(--sp-lg);
+}
+.rule__phase {
+	color: var(--cp-primary);
+	font-weight: 900;
+	font-size: 0.78rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	display: block;
+	margin-bottom: var(--sp-sm);
+}
+.rule h3 {
+	font-size: 1.2rem;
+	margin-bottom: var(--sp-sm);
+}
+.rule ul {
+	margin: 0;
+	padding-left: 1.1em;
+	color: var(--cp-text-muted);
+}
+.rule li {
+	margin-bottom: var(--sp-xs);
+}
+.rule strong {
+	color: var(--cp-text);
+}
+
+.variants {
+	margin-top: var(--sp-xl);
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--sp-sm);
+	justify-content: center;
+}
+.variant {
+	background: var(--cp-bg-elevated);
+	border: 1px solid var(--cp-border);
+	border-radius: 999px;
+	padding: 8px 16px;
+	font-size: 0.9rem;
+	color: var(--cp-text-muted);
+}
+.variant strong {
+	color: var(--cp-gold);
+}
+
+/* --- Course ground (decorative) -----------------------------------------
+   Pinned to the bottom of the hero (= bottom of the first viewport). It's part
+   of the hero, so it scrolls up with the page as the user scrolls down. */
+.ground {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 2;
+	height: var(--ground-h);
+	background: #3aa756;         /* grass */
+	border-top: 10px solid #102445; /* dark horizon line on top of the green */
+	overflow: hidden;
+}
+.ground__hazard {
+	position: absolute;
+	bottom: 20px;
+	height: auto;
+	pointer-events: none;
+	user-select: none;
+	filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.25));
+}
+/* Fixed layout: water left, ball centered, sand right.
+   The ball sits a little lower than the other two. */
+.ground__hazard--water { width: 344px; left: 5%; bottom: 70px; }
+.ground__hazard--ball  { width: 148px; left: 50%; transform: translateX(-50%); bottom: 4px; }
+.ground__hazard--sand  { width: 232px; right: 5%; }
+
+/* --- Entry / generic content -------------------------------------------- */
+.entry__content a { text-decoration: underline; }
+
+/* --- Legal pages (privacy, terms) --------------------------------------- */
+.legal-hero {
+	text-align: center;
+	padding: var(--sp-2xl) 0;
+	background: var(--cp-sky);
+}
+.legal-hero h1 {
+	color: var(--cp-white);
+	text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+	margin-bottom: var(--sp-xs);
+}
+.legal-hero__updated {
+	color: #EAF4FB;
+	font-size: 0.9rem;
+	font-weight: 600;
+	margin: 0;
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+.legal {
+	text-align: left;
+	color: var(--cp-text);
+	font-size: 1rem;
+	line-height: 1.7;
+}
+.legal h2 {
+	font-size: clamp(1.3rem, 3vw, 1.7rem);
+	margin: var(--sp-xl) 0 var(--sp-sm);
+	color: var(--cp-text);
+}
+.legal h2:first-of-type {
+	margin-top: 0;
+}
+.legal h3 {
+	font-size: 1.1rem;
+	margin: var(--sp-lg) 0 var(--sp-xs);
+}
+.legal p,
+.legal li {
+	color: var(--cp-text-muted);
+}
+.legal ul {
+	padding-left: 1.3em;
+	margin: 0 0 var(--sp-md);
+}
+.legal li {
+	margin-bottom: var(--sp-xs);
+}
+.legal a {
+	color: var(--cp-primary);
+	text-decoration: underline;
+}
+.legal strong {
+	color: var(--cp-text);
+}
+.legal__intro {
+	color: var(--cp-text) !important;
+	font-size: 1.08rem;
+}
+
+/* --- Footer -------------------------------------------------------------- */
+.site-footer {
+	background: var(--cp-bg-elevated);
+	border-top: 1px solid var(--cp-border);
+	padding: var(--sp-2xl) 0 var(--sp-xl);
+	text-align: center;
+}
+.site-footer__tagline {
+	font-weight: 900;
+	font-size: 1.15rem;
+	margin-bottom: var(--sp-lg);
+}
+.site-footer__nav {
+	display: flex;
+	gap: var(--sp-lg);
+	justify-content: center;
+	flex-wrap: wrap;
+	margin-bottom: var(--sp-lg);
+}
+.site-footer__nav a {
+	color: var(--cp-text);
+	font-weight: 700;
+}
+.site-footer__nav a:hover {
+	color: var(--cp-gold);
+}
+.site-footer__physical {
+	color: var(--cp-text-muted) !important;
+	font-weight: 600 !important;
+	font-size: 0.92rem;
+}
+.site-footer__legalnav {
+	display: flex;
+	gap: var(--sp-sm);
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-bottom: var(--sp-lg);
+	font-size: 0.9rem;
+}
+.site-footer__legalnav a {
+	color: var(--cp-text-muted);
+	font-weight: 600;
+}
+.site-footer__legalnav a:hover {
+	color: var(--cp-gold);
+}
+.site-footer__legalnav span {
+	color: var(--cp-text-muted);
+	opacity: 0.5;
+}
+.site-footer__credit {
+	color: var(--cp-text-muted);
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	margin-bottom: var(--sp-xs);
+}
+.site-footer__legal {
+	color: var(--cp-text-muted);
+	font-size: 0.82rem;
+	opacity: 0.7;
+	margin: 0;
+}
+
+/* --- Reveal on scroll ----------------------------------------------------
+   Only hide when JS is present to restore it — no-JS/crawlers see everything. */
+.js .reveal {
+	opacity: 0;
+	transform: translateY(24px);
+	transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.js .reveal.is-visible {
+	opacity: 1;
+	transform: none;
+}
+
+/* --- Responsive ---------------------------------------------------------- */
+@media (max-width: 860px) {
+	.grid--3,
+	.rules {
+		grid-template-columns: 1fr;
+	}
+	.section { padding: var(--sp-2xl) 0; }
+}
+
+/* Narrow screens: push the water mostly off the left and the sand mostly off the
+   right, keep the ball centered, and guarantee the three never overlap. The
+   visible slice scales with the viewport (vw), so it stays clear down to ~340px. */
+@media (max-width: 960px) {
+	.ground__hazard--water {
+		left: 0;
+		right: auto;
+		/* right edge lands at 28vw → only the right ~28vw of the pond shows */
+		transform: translateX(calc(28vw - 100%));
+	}
+	.ground__hazard--sand {
+		left: 72vw;
+		right: auto;
+		transform: none;
+	}
+	/* ball stays centered (left:50% / translateX(-50%)) */
+}
+
+@media (max-width: 560px) {
+	.site-header__wordmark { display: none; }
+	.site-nav__list { gap: var(--sp-md); }
+	.deck__card { margin: 0 -6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.hero__cloud { animation: none; }
+	html { scroll-behavior: auto; }
+	.js .reveal { transition: none; opacity: 1; transform: none; }
+}

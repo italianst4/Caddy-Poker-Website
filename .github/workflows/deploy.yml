@@ -1,0 +1,45 @@
+name: Deploy theme to Bluehost
+
+# Deploys the Caddy Poker 2026 theme to Bluehost whenever the theme changes on
+# main. The theme is plain PHP/CSS/JS (no build step), so deploy = rsync the
+# theme folder into WordPress's themes directory over SSH.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'wp-content/themes/caddy-poker-2026/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch: {} # allow manual runs from the Actions tab
+
+# Never run two deploys at once; cancel an in-flight one if a newer push lands.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.BLUEHOST_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "${{ secrets.BLUEHOST_SSH_PORT }}" -H "${{ secrets.BLUEHOST_SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Deploy with rsync
+        run: |
+          rsync -avz --delete \
+            --exclude='.DS_Store' \
+            -e "ssh -p ${{ secrets.BLUEHOST_SSH_PORT }} -i ~/.ssh/deploy_key" \
+            wp-content/themes/caddy-poker-2026/ \
+            "${{ secrets.BLUEHOST_SSH_USER }}@${{ secrets.BLUEHOST_SSH_HOST }}:${{ secrets.BLUEHOST_THEME_PATH }}/"
+
+      # Trailing slashes matter above: "…/caddy-poker-2026/" (source) syncs the
+      # folder's CONTENTS into BLUEHOST_THEME_PATH. --delete makes the server
+      # match the repo exactly (removes files you deleted here). It only touches
+      # the theme dir, never wp-content/uploads or the database.

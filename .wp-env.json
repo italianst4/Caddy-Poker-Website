@@ -1,0 +1,15 @@
+{
+  "core": null,
+  "themes": [
+    "./wp-content/themes/caddy-poker-2026"
+  ],
+  "plugins": [],
+  "config": {
+    "WP_DEBUG": true,
+    "WP_DEBUG_DISPLAY": true,
+    "SCRIPT_DEBUG": true
+  },
+  "mappings": {
+    "wp-content/themes/caddy-poker-2026": "./wp-content/themes/caddy-poker-2026"
+  }
+}

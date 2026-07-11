@@ -1,0 +1,17 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# wp-env / Docker local state
+.wp-env.override.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Build artifacts
+*.zip
