@@ -81,7 +81,7 @@ if ( file_exists( $poster_path ) ) {
 	<div class="container">
 		<span class="eyebrow">How to play</span>
 		<h2>It&rsquo;s anyone&rsquo;s game to lose!</h2>
-		<p class="lead">Watch a full round come together &mdash; draw your cards, beat the course, and build the best hand.</p>
+		<p class="lead">You don&rsquo;t need a scratch handicap to take the pot &mdash; just the right cards at the right hole. See how it works.</p>
 
 		<div class="video-wrap" style="margin-top: var(--sp-2xl);">
 			<video

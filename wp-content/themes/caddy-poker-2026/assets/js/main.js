@@ -57,9 +57,16 @@
 		}
 	}
 
-	// When the how-to-play video starts playing, take it fullscreen.
+	// On phones only, take the how-to-play video fullscreen when it starts playing.
+	// Tablets (iPad, Android tablets) and desktops keep it inline. Android phones
+	// include "Mobile" in the UA; Android tablets don't. iPhone/iPod match directly,
+	// while iPad does not — so it's correctly treated as a tablet.
+	var vua = navigator.userAgent || '';
+	var isPhone = /iPhone|iPod/.test(vua) ||
+		(/Android/.test(vua) && /Mobile/.test(vua)) ||
+		/Windows Phone|IEMobile|BlackBerry/.test(vua);
 	var video = document.querySelector('.video-wrap video');
-	if (video) {
+	if (video && isPhone) {
 		var goFullscreen = function () {
 			// Standard Fullscreen API (Chrome, Firefox, Edge, desktop Safari).
 			if (video.requestFullscreen) {
