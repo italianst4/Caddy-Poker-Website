@@ -93,7 +93,30 @@ The theme is a self-contained, uploadable WordPress theme.
 
 ## Brand
 
-Palette and voice mirror the app (`caddy-poker-app/src/theme.ts`): deep fairway green
-backgrounds (`#0B1F17`), golf-green accent (`#34C759`), gold highlight (`#FFD66B`), off-white
-text, heavy 800–900 system-font weights. Assets originate in the sister app repo and are
-downscaled/compressed into `assets/` here.
+Palette and voice mirror the app (`caddy-poker-app/src/theme.ts`): a dark "deep fairway green"
+theme with a bright golf-green accent, gold highlights, and a vibrant sky-blue hero, set in heavy
+800–900 system-font weights. Assets originate in the sister app repo and are downscaled/compressed
+into `assets/` here.
+
+Colors are defined as CSS custom properties at the top of
+[`assets/css/main.css`](wp-content/themes/caddy-poker-2026/assets/css/main.css).
+
+| Hex | Token | Use |
+|---|---|---|
+| `#0B1F17` | `--cp-bg` | page background (deep fairway green) |
+| `#102B20` | `--cp-bg-elevated` | elevated sections |
+| `#16382A` | `--cp-card` | cards / panels |
+| `#1F4D39` | `--cp-border` | borders |
+| `#F4F8F5` | `--cp-text` | body text |
+| `#9CB7A8` | `--cp-text-muted` | secondary text (sage) |
+| `#34C759` | `--cp-primary` | golf-green accent, primary buttons |
+| `#06210F` | `--cp-primary-text` | text on green buttons |
+| `#42A7DE` | `--cp-sky` | hero background (sky blue) |
+| `#FFD66B` | `--cp-gold` | highlights, CTA accents |
+| `#FF6B6B` | `--cp-danger` | errors / warnings |
+| `#FFFFFF` | `--cp-white` | white |
+| `#0A0A0A` | `--cp-black` | black |
+| `#3AA756` | — | course "grass" ground band |
+| `#102445` | — | ground horizon line |
+
+Type: heavy system-font weights (800–900) — no custom/licensed font.

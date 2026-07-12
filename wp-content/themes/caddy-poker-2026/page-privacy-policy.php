@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Edit these values as needed.
-$cp_effective     = 'July 6, 2026';
+$cp_effective     = 'July 12, 2026';
 $cp_contact_email = 'hello@caddypoker.com';
 $cp_min_age       = '17'; // Align with your App Store / Google Play content rating.
 
@@ -42,8 +42,9 @@ get_header();
 		</p>
 
 		<h2>Information we collect</h2>
-		<p>We do <strong>not</strong> require you to create an account or provide your name, email, or
-			payment information to play the game. The information involved is limited to the following
+		<p>We do <strong>not</strong> require you to create an account or give us your name or email to
+			play the game, and any payment for the optional in-app purchase is handled by the App Store &mdash;
+				we never receive your credit-card or bank details. The information involved is limited to the following
 			(the categories in parentheses match the App Store &ldquo;App Privacy&rdquo; and Google Play
 			&ldquo;Data safety&rdquo; disclosures):</p>
 		<ul>
@@ -57,7 +58,12 @@ get_header();
 			<li><strong>Device identifiers</strong> (Identifiers). A pseudonymous analytics identifier
 				used to count sessions. This is not tied to your name and is not used to track you across
 				other apps or websites.</li>
-			<li><strong>Approximate location</strong> (Coarse Location). Our analytics provider may infer
+			<li><strong>Purchase data</strong> (Purchases). If you buy the optional one-time full-game
+					unlock, we receive a record of the transaction &mdash; such as the product identifier,
+					purchase and restore status, store country, and a pseudonymous purchase identifier &mdash;
+					from the App Store and our purchases provider so we can deliver and restore your purchase.
+					This does <strong>not</strong> include your payment card or App Store account credentials.</li>
+				<li><strong>Approximate location</strong> (Coarse Location). Our analytics provider may infer
 				an approximate, city-level location from your IP address. We do not collect precise GPS
 				location.</li>
 			<li><strong>Website data.</strong> When you visit this website, standard technical
@@ -70,6 +76,7 @@ get_header();
 		<h2>How we use information</h2>
 		<ul>
 			<li>To operate, maintain, and improve the Service.</li>
+				<li>To process, deliver, and restore your in-app purchase, and to keep basic sales records.</li>
 			<li>To diagnose problems, analyze trends, and understand overall usage.</li>
 			<li>To protect the security and integrity of the Service.</li>
 		</ul>
@@ -83,6 +90,22 @@ get_header();
 			be processed or stored in countries other than your own (including the United States). You can
 			review PostHog&rsquo;s privacy practices at
 			<a href="https://posthog.com/privacy" target="_blank" rel="noopener">posthog.com/privacy</a>.</p>
+
+		<h2>Purchases and payments</h2>
+			<p>The app is free to download and includes a limited-time free trial. After the trial, an
+				optional <strong>one-time in-app purchase</strong> unlocks the full game. It is not a
+				subscription and does not recur. <strong>All payments are processed by Apple</strong> through
+				your App Store account &mdash; we do not receive or store your payment card, bank, or App Store
+				login details.</p>
+			<p>We use <strong>RevenueCat</strong> to manage, validate, and restore in-app purchases on our
+				behalf. RevenueCat processes purchase-related data &mdash; such as the product purchased,
+				transaction and receipt details, purchase and restore status, store country, and a
+				pseudonymous app-user identifier &mdash; so we can deliver your purchase, enable
+				&ldquo;Restore Purchase&rdquo; across your devices, prevent fraud and abuse, and keep basic
+				sales records. This data is not tied to your name and is not used to track you across other
+				companies&rsquo; apps or websites. RevenueCat may process this data in the United States and
+				other countries under its own privacy policy, available at
+				<a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">revenuecat.com/privacy</a>.</p>
 
 		<h2>Tracking and advertising identifiers</h2>
 		<p>We do <strong>not</strong> use the Apple Advertising Identifier (IDFA), the Google Advertising
@@ -104,12 +127,18 @@ get_header();
 				<a href="mailto:<?php echo esc_attr( $cp_contact_email ); ?>"><?php echo esc_html( $cp_contact_email ); ?></a>
 				to request deletion of analytics data associated with your device, and we will process
 				your request as required by applicable law.</li>
+				<li><strong>Purchase records:</strong> your purchase is tied to your App Store account and can
+					be re-downloaded with &ldquo;Restore Purchase&rdquo;; to request deletion of purchase data
+					held by our purchases provider, email us. We may retain records needed to honor or restore
+					your purchase, prevent fraud, or meet tax and accounting obligations.</li>
 		</ul>
 
 		<h2>Data retention</h2>
 		<p>On-device game data remains on your device until you delete the app or clear its data.
 			Analytics data is retained only as long as needed for the purposes described in this policy,
-			after which it is deleted or de-identified.</p>
+			after which it is deleted or de-identified. Purchase and transaction records are kept for as
+				long as needed to honor and restore your purchase and to meet legal, tax, and accounting
+				requirements.</p>
 
 		<h2>Your privacy choices and rights</h2>
 		<p><strong>Opting out of analytics.</strong> You can opt out of analytics in the app&rsquo;s

@@ -57,6 +57,29 @@
 		}
 	}
 
+	// When the how-to-play video starts playing, take it fullscreen.
+	var video = document.querySelector('.video-wrap video');
+	if (video) {
+		var goFullscreen = function () {
+			// Standard Fullscreen API (Chrome, Firefox, Edge, desktop Safari).
+			if (video.requestFullscreen) {
+				video.requestFullscreen().catch(function () {});
+			} else if (video.webkitRequestFullscreen) {
+				video.webkitRequestFullscreen();
+			} else if (video.webkitEnterFullscreen) {
+				// iOS Safari: only the <video> element itself can go fullscreen.
+				video.webkitEnterFullscreen();
+			}
+		};
+		video.addEventListener('play', function () {
+			// Don't re-request if we're already fullscreen.
+			var fsEl = document.fullscreenElement || document.webkitFullscreenElement;
+			if (!fsEl && !video.webkitDisplayingFullscreen) {
+				goFullscreen();
+			}
+		});
+	}
+
 	// Hide the nav bar at the very top; reveal it once the user scrolls down.
 	var header = document.getElementById('site-header');
 	if (header) {
