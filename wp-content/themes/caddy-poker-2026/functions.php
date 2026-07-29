@@ -71,6 +71,33 @@ function caddy_poker_img( $file ) {
 }
 
 /**
+ * Whether the page is being viewed inside the app's in-app browser (?inappwebview=1).
+ *
+ * When true, templates drop the site chrome (header, footer, page title) so the
+ * legal pages read as part of the app rather than as website pages.
+ *
+ * @return bool
+ */
+function caddy_poker_is_inappwebview() {
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only presentation toggle.
+	return isset( $_GET['inappwebview'] ) && '1' === sanitize_text_field( wp_unslash( $_GET['inappwebview'] ) );
+}
+
+/**
+ * Flag in-app-browser requests on <body> so CSS can adjust.
+ *
+ * @param string[] $classes Body classes.
+ * @return string[]
+ */
+function caddy_poker_body_class( $classes ) {
+	if ( caddy_poker_is_inappwebview() ) {
+		$classes[] = 'is-inappwebview';
+	}
+	return $classes;
+}
+add_filter( 'body_class', 'caddy_poker_body_class' );
+
+/**
  * Emit the favicon from the theme (so no admin upload is needed on Bluehost).
  */
 function caddy_poker_favicon() {

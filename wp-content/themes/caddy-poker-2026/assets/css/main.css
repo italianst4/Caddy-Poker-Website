@@ -557,6 +557,11 @@ p { margin: 0 0 var(--sp-md); }
 	margin: 0;
 	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
+/* In-app browser (?inappwebview=1): no title, so left-align and tighten the band. */
+.legal-hero--embed {
+	text-align: left;
+	padding: var(--sp-sm) 0;
+}
 .legal {
 	text-align: left;
 	color: var(--cp-text);

@@ -24,12 +24,17 @@ $cp_contact_email = 'hello@caddypoker.com';
 $cp_jurisdiction  = 'the United States'; // e.g. 'the State of Illinois, USA'
 $cp_min_age       = '17'; // Align with your App Store / Google Play content rating.
 
+// Inside the app's in-app browser: no page title, just a left-aligned "last updated".
+$cp_embed = caddy_poker_is_inappwebview();
+
 get_header();
 ?>
 
-<section class="legal-hero">
+<section class="legal-hero<?php echo $cp_embed ? ' legal-hero--embed' : ''; ?>">
 	<div class="container">
-		<h1>Terms of Service</h1>
+		<?php if ( ! $cp_embed ) : ?>
+			<h1>Terms of Service</h1>
+		<?php endif; ?>
 		<p class="legal-hero__updated">Last updated: <?php echo esc_html( $cp_effective ); ?></p>
 	</div>
 </section>

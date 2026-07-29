@@ -21,6 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
+<?php // In the app's in-app browser the site chrome is hidden; the app supplies its own. ?>
+<?php if ( ! caddy_poker_is_inappwebview() ) : ?>
+
 <a class="skip-link" href="#main"><?php esc_html_e( 'Skip to content', 'caddy-poker-2026' ); ?></a>
 
 <header class="site-header" id="site-header">
@@ -53,5 +56,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</nav>
 	</div>
 </header>
+
+<?php endif; ?>
 
 <main id="main" class="site-main">

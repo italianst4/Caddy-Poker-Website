@@ -11,6 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 </main><!-- #main -->
 
+<?php // In the app's in-app browser the site chrome is hidden; the app supplies its own. ?>
+<?php if ( ! caddy_poker_is_inappwebview() ) : ?>
+
 <footer class="site-footer">
 	<div class="container site-footer__inner">
 		<p class="site-footer__tagline">Play Golf. Play Poker. Play Both.</p>
@@ -31,6 +34,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<p class="site-footer__legal">&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> Caddy Poker. All rights reserved.</p>
 	</div>
 </footer>
+
+<?php endif; ?>
 
 <?php wp_footer(); ?>
 </body>
