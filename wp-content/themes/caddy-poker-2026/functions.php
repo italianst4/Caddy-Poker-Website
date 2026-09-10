@@ -13,6 +13,11 @@ if ( ! defined( 'CADDY_POKER_VERSION' ) ) {
 	define( 'CADDY_POKER_VERSION', '1.0.0' );
 }
 
+// App Store listing for the iOS app. The ref param attributes installs to this site.
+if ( ! defined( 'CADDY_POKER_IOS_APP_URL' ) ) {
+	define( 'CADDY_POKER_IOS_APP_URL', 'https://apps.apple.com/us/app/caddy-poker/id6787772294/?ref=caddypoker.com' );
+}
+
 /**
  * Theme setup: title tag, featured images, HTML5 markup, nav menus.
  */

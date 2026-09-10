@@ -2,8 +2,9 @@
 /**
  * Front page — Caddy Poker app landing.
  *
- * Sections: hero, coming-soon store placeholders, how-it-works features,
- * card-deck showcase. The footer (credit + physical-game link) is in footer.php.
+ * Sections: hero, store badges (App Store live, Play Store coming soon),
+ * how-it-works features, card-deck showcase. The footer (credit + physical-game
+ * link) is in footer.php.
  *
  * @package caddy-poker-2026
  */
@@ -41,20 +42,18 @@ if ( file_exists( $poster_path ) ) {
 			Draw challenge cards as you play, earn poker cards for every hole you conquer, and build the best five-card hand on the course.
 		</p>
 
-		<!-- ================= COMING SOON PLACEHOLDERS ================= -->
+		<!-- ================= STORE BADGES ================= -->
 		<div class="store-badges" id="get-the-app">
 			<?php
 			/*
-			 * TODO: When the app ships, make each badge a link and drop its "Coming Soon"
-			 * chip — change <span class="store-badge"> to
-			 * <a class="store-badge" href="https://apps.apple.com/app/idXXXXXXXXX">.
-			 * The [href] CSS rule lifts them on hover.
+			 * iOS is live. Android is still a placeholder — when it ships, swap the
+			 * <span class="store-badge"> for an <a class="store-badge" href="PLAY_STORE_URL">
+			 * and drop its "Coming Soon" chip, the same shape as the iOS badge below.
 			 */
 			?>
-			<span class="store-badge" data-store="ios" role="img" aria-label="Caddy Poker for iOS — coming soon">
-				<span class="store-badge__tag">Coming Soon</span>
+			<a class="store-badge" data-store="ios" href="<?php echo esc_url( CADDY_POKER_IOS_APP_URL ); ?>" aria-label="Download Caddy Poker on the App Store">
 				<img class="store-badge__img" src="<?php echo esc_url( caddy_poker_img( 'app-store.png' ) ); ?>" alt="Download on the App Store" width="174" height="58">
-			</span>
+			</a>
 
 			<span class="store-badge" data-store="android" role="img" aria-label="Caddy Poker for Android — coming soon">
 				<span class="store-badge__tag">Coming Soon</span>

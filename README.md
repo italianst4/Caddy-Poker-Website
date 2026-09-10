@@ -3,9 +3,9 @@
 Marketing website and custom WordPress theme (**Caddy Poker 2026**) for the Caddy Poker
 mobile app. Play Golf. Play Poker. Play Both.
 
-- **Single landing page** — app pitch + "iOS / Android — Coming Soon" placeholders (swap to
-  real store links later), an embedded **How to Play** tutorial video (`#how-to-play` anchor),
-  and a card-deck showcase.
+- **Single landing page** — app pitch + store badges (**App Store link is live**; Android is
+  still a "Coming Soon" placeholder), an embedded **How to Play** tutorial video
+  (`#how-to-play` anchor), and a card-deck showcase.
 - Hosted on **Bluehost** (standard WordPress). Developed locally with `@wordpress/env`.
 
 ## Repository layout
@@ -75,11 +75,13 @@ The theme is a self-contained, uploadable WordPress theme.
 
 ## Updating for launch
 
-- **Real app store links:** in [`front-page.php`](wp-content/themes/caddy-poker-2026/front-page.php),
-  each "Coming Soon" badge is a `<span class="store-badge">`. Change it to
-  `<a class="store-badge" href="STORE_URL">` and drop the `store-badge__tag` span — the CSS
-  restyles `[href]` badges into live, gold-bordered buttons automatically. (Search for the
-  `TODO` comment in that file.)
+- **Real app store links:** the iOS badge in
+  [`front-page.php`](wp-content/themes/caddy-poker-2026/front-page.php) is live and points at
+  `CADDY_POKER_IOS_APP_URL` (defined in
+  [`functions.php`](wp-content/themes/caddy-poker-2026/functions.php) — edit it there). The
+  Android badge is still a `<span class="store-badge">`; when the Play Store listing ships,
+  change it to `<a class="store-badge" href="STORE_URL">` and drop the `store-badge__tag` span,
+  matching the iOS badge. The CSS gives `[href]` badges a pointer cursor and hover lift.
 - **Tutorial video:** lives at `assets/video/caddypoker-how-to-play.mp4` (compressed to ~2 MB,
   720p portrait) with a poster at `assets/img/how-to-play-poster.jpg`. Re-export from the app
   repo's `assets/caddypoker-how-to-play.mp4` if it changes.
